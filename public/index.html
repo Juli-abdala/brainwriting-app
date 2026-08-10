@@ -9,36 +9,26 @@
     --orange:#E8792B; --orange-d:#c9631b;
     --navy:#1E2A4A; --ink:#24304f;
     --cream:#FBEADA; --cream-2:#fcefe3;
-    --bg:#ffffff; --muted:#6b7690; --line:#e7e3dd; --ok:#2e9e5b; --danger:#c0392b;
+    --bg:#ffffff; --muted:#6b7690; --line:#e7e3dd; --ok:#2e9e5b; --danger:#c0392b; --gold:#e0a326;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
-  body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    color:var(--navy); background:var(--bg); line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:1100px;margin:0 auto;padding:24px 18px 80px}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--navy);background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1160px;margin:0 auto;padding:22px 18px 90px}
   .eyebrow{color:var(--orange);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:13px;margin:0 0 6px}
-  h1{font-size:clamp(26px,4vw,40px);font-weight:800;margin:0 0 8px;letter-spacing:-.01em}
-  h2{font-size:20px;font-weight:800;margin:0 0 4px}
+  h1{font-size:clamp(24px,4vw,40px);font-weight:800;margin:0 0 8px;letter-spacing:-.01em}
+  h2{font-size:19px;font-weight:800;margin:0 0 4px}
+  h3{font-size:15px;font-weight:800;margin:0 0 8px}
   p.sub{color:var(--muted);margin:0 0 22px;font-size:16px}
   .card{background:var(--cream);border-radius:16px;padding:18px 20px;margin:0 0 14px}
   .card.plain{background:#fff;border:1px solid var(--line)}
   .grid{display:grid;gap:14px}
   @media(min-width:720px){.grid.cols3{grid-template-columns:repeat(3,1fr)}.grid.cols2{grid-template-columns:repeat(2,1fr)}}
   label{display:block;font-weight:700;font-size:14px;margin:0 0 6px}
-  input[type=text],textarea,input[type=number]{
-    width:100%;font:inherit;color:var(--ink);background:#fff;border:1.5px solid var(--line);
-    border-radius:10px;padding:11px 13px;outline:none;transition:border-color .15s
-  }
-  input:focus,textarea:focus{border-color:var(--orange)}
-  textarea{resize:vertical;min-height:96px}
-  .btn{
-    display:inline-flex;align-items:center;gap:8px;justify-content:center;
-    font:inherit;font-weight:800;cursor:pointer;border:none;border-radius:11px;
-    padding:12px 20px;background:var(--orange);color:#fff;transition:background .15s,transform .05s;
-  }
+  input[type=text],textarea,input[type=number],select{width:100%;font:inherit;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;outline:none;transition:border-color .15s}
+  input:focus,textarea:focus,select:focus{border-color:var(--orange)}
+  textarea{resize:vertical;min-height:90px}
+  .btn{display:inline-flex;align-items:center;gap:8px;justify-content:center;font:inherit;font-weight:800;cursor:pointer;border:none;border-radius:11px;padding:12px 20px;background:var(--orange);color:#fff;transition:background .15s,transform .05s}
   .btn:hover{background:var(--orange-d)}
   .btn:active{transform:translateY(1px)}
   .btn:disabled{opacity:.45;cursor:not-allowed}
@@ -47,18 +37,17 @@
   .btn.ghost{background:transparent;color:var(--navy);padding:8px 12px}
   .btn.sm{padding:8px 13px;font-size:14px;border-radius:9px}
   .btn.danger{background:#fff;color:var(--danger);border:1.5px solid #f0d3cf}
+  .btn.on{background:var(--navy)}
   .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
   .spacer{flex:1}
   .hidden{display:none !important}
   .pill{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:700}
   .dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
   .dot.on{background:var(--ok)}
-  .code{font-weight:800;letter-spacing:.22em;font-size:clamp(38px,9vw,76px);color:var(--navy);line-height:1}
-  .muted{color:var(--muted)}
-  .small{font-size:13px}
-  .timer{font-variant-numeric:tabular-nums;font-weight:800;font-size:clamp(48px,12vw,96px);line-height:1;letter-spacing:.01em}
-  .timer.low{color:var(--danger)}
-  .timer.paused{opacity:.45}
+  .code{font-weight:800;letter-spacing:.22em;font-size:clamp(34px,8vw,72px);line-height:1}
+  .muted{color:var(--muted)} .small{font-size:13px}
+  .timer{font-variant-numeric:tabular-nums;font-weight:800;font-size:clamp(44px,11vw,90px);line-height:1}
+  .timer.low{color:var(--danger)} .timer.paused{opacity:.45}
   .need{background:#fff;border-left:5px solid var(--orange);border-radius:8px;padding:12px 14px;font-size:17px;font-weight:600}
   .prompt{font-size:16px}
   .tag{display:inline-block;background:var(--orange);color:#fff;font-size:12px;font-weight:800;border-radius:6px;padding:3px 8px;text-transform:uppercase;letter-spacing:.04em}
@@ -66,22 +55,57 @@
   .layer .who{font-size:12px;font-weight:800;color:var(--orange);text-transform:uppercase;letter-spacing:.03em;margin:0 0 4px}
   .layer .txt{white-space:pre-wrap;color:var(--ink)}
   .sheet{background:var(--cream);border-radius:14px;padding:14px 16px}
-  .sheet h3{margin:0 0 10px;font-size:15px;font-weight:800}
   .plist{display:flex;flex-wrap:wrap;gap:8px}
   .plist .p{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-weight:700;font-size:14px;display:flex;align-items:center;gap:7px}
   .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:11px 18px;border-radius:10px;font-weight:700;box-shadow:0 8px 30px rgba(0,0,0,.2);z-index:50;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
   .err{color:var(--danger);font-weight:700;font-size:14px;margin-top:8px}
-  .save{font-size:13px;font-weight:700;color:var(--muted)}
-  .save.ok{color:var(--ok)}
+  .save{font-size:13px;font-weight:700;color:var(--muted)} .save.ok{color:var(--ok)}
   .linkbox{display:flex;gap:8px;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:8px 10px}
   .linkbox input{border:none;padding:4px 2px}
   .progress{display:flex;gap:6px;margin:6px 0 0}
   .progress .seg{height:6px;flex:1;border-radius:999px;background:#fff;border:1px solid var(--line)}
-  .progress .seg.done{background:var(--orange);border-color:var(--orange)}
-  .progress .seg.cur{background:var(--orange);opacity:.55;border-color:var(--orange)}
+  .progress .seg.done,.progress .seg.cur{background:var(--orange);border-color:var(--orange)}
+  .progress .seg.cur{opacity:.55}
   a{color:var(--orange-d)}
-  .rounds-edit .re{display:grid;grid-template-columns:1fr 90px;gap:8px;align-items:start;margin-bottom:8px}
+  .rounds-edit .re{display:grid;grid-template-columns:1fr 90px;gap:8px;margin-bottom:8px}
+  .area-h{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--navy);margin:14px 0 6px;padding-left:8px;border-left:4px solid var(--line)}
+  .need-item{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;margin:0 0 6px;cursor:pointer}
+  .need-item.sel{border-color:var(--orange);background:#fff6ef}
+  .need-item input{width:18px;height:18px;margin-top:2px;accent-color:var(--orange);cursor:pointer}
+  .need-item .t{font-size:14.5px}
+  .selbar{position:sticky;top:0;background:#fff;border:1.5px solid var(--orange);border-radius:12px;padding:12px 14px;z-index:5;margin-bottom:12px}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+  .tab{padding:9px 15px;border-radius:10px;border:1.5px solid var(--line);background:#fff;font-weight:800;cursor:pointer;font-size:14px}
+  .tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .mural{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+  .mcol{border-radius:14px;padding:12px 14px;border:1px solid var(--line)}
+  .mcol .mneed{font-weight:800;font-size:14.5px;margin:0 0 4px}
+  .mcol .marea{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;opacity:.75;margin:0 0 10px}
+  .postit{background:#fff;border-radius:9px;padding:9px 11px;margin:0 0 8px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+  .postit .r{font-size:11px;font-weight:800;color:var(--orange);text-transform:uppercase}
+  .postit .x{white-space:pre-wrap;font-size:14px}
+  .votebadge{display:inline-flex;align-items:center;gap:4px;background:var(--gold);color:#3a2c05;font-weight:800;border-radius:999px;padding:2px 9px;font-size:13px}
+  .votecard{display:flex;gap:12px;align-items:center;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 8px;cursor:pointer;background:#fff}
+  .votecard.picked{border-color:var(--orange);background:#fff6ef}
+  .votecard .barwrap{flex:1;height:12px;background:#eee;border-radius:999px;overflow:hidden}
+  .votecard .bar{height:100%;background:var(--orange)}
+  .votecard .cnt{font-weight:800;min-width:24px;text-align:right}
+  .vcheck{width:22px;height:22px;border-radius:6px;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff}
+  .vcheck.on{background:var(--orange);border-color:var(--orange)}
+  .matrix-wrap{position:relative;max-width:600px;margin:0 auto}
+  .mgrid{position:relative;width:100%;aspect-ratio:1/1;background:#fff;border:2px solid var(--navy);border-radius:12px;overflow:hidden;touch-action:none}
+  .mgrid .axis-v{position:absolute;left:50%;top:0;bottom:0;border-left:1px dashed #cbd2e0}
+  .mgrid .axis-h{position:absolute;top:50%;left:0;right:0;border-top:1px dashed #cbd2e0}
+  .quad{position:absolute;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:#9aa3b5;padding:6px 8px}
+  .q-tr{right:6px;top:6px} .q-tl{left:6px;top:6px} .q-br{right:6px;bottom:6px} .q-bl{left:6px;bottom:6px}
+  .axlabel{font-weight:800;font-size:12.5px;color:var(--navy);text-align:center}
+  .mcard{position:absolute;transform:translate(-50%,-50%);background:#fff;border:1.5px solid var(--navy);border-radius:9px;padding:5px 8px;font-size:12px;font-weight:700;max-width:150px;box-shadow:0 2px 6px rgba(0,0,0,.12);cursor:pointer}
+  .mcard.sel{outline:3px solid var(--orange)}
+  .tray{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .traycard{background:#fff;border:1.5px solid var(--line);border-radius:9px;padding:7px 10px;font-size:12.5px;font-weight:700;cursor:pointer;max-width:220px}
+  .traycard.sel{border-color:var(--orange);background:#fff6ef}
+  .promptbox{white-space:pre-wrap;background:#0f1526;color:#e7ecf5;border-radius:12px;padding:16px 18px;font-size:15px;line-height:1.6}
   @media(max-width:520px){.code{letter-spacing:.12em}}
 </style>
 </head>
@@ -97,102 +121,73 @@ const app = document.getElementById("app");
 const toastEl = document.getElementById("toast");
 let state = null;
 let me = { role:null, code:null, facilitatorToken:null, participantId:null, name:null };
-let localDraft = ""; let saveState = "idle"; let saveTimer=null; let tick=null;
+let saveState="idle", saveTimer=null, tick=null, lastKey=null;
+let selectedCard=null;
+let skepticLocal={ sheetId:null, rol:"Gerente de Operaciones", rolFree:"", cliente:"", desc:"" };
 
-// ---- persistencia liviana ----
-const LS = "brainwriting.session";
-function saveLocal(){ try{ localStorage.setItem(LS, JSON.stringify(me)); }catch(e){} }
+const AREA_COLORS = {
+  "Estrategia y Planeación":"#F3D9C0","Finanzas y Contabilidad":"#CFE3D4","I+D/Innovación":"#D9DCF3",
+  "IT/Transformación Digital":"#CDE6EE","Marketing y Ventas":"#F3D0D6","Producción/Operaciones":"#E6DDC7",
+  "RRHH":"#E5D4EC","Servicio/Atención al cliente":"#F6E2B8","Supply Chain/Logística":"#CFE8E0","Agregada":"#E9E9E9"
+};
+function areaColor(a){ return AREA_COLORS[a] || "#EDE7DF"; }
+const ROLES=["Gerente de Operaciones","Director de RRHH","Gerente de Planificación","Gerente de Finanzas","Director Comercial","Gerente de Supply Chain","Otro (escribir)"];
+
+const LS="brainwriting.session";
+function saveLocal(){ try{ localStorage.setItem(LS,JSON.stringify(me)); }catch(e){} }
 function loadLocal(){ try{ return JSON.parse(localStorage.getItem(LS)||"null"); }catch(e){ return null; } }
 function clearLocal(){ try{ localStorage.removeItem(LS); }catch(e){} }
-
-function toast(msg){ toastEl.textContent=msg; toastEl.classList.add("show"); setTimeout(()=>toastEl.classList.remove("show"),2200); }
+function toast(m){ toastEl.textContent=m; toastEl.classList.add("show"); setTimeout(()=>toastEl.classList.remove("show"),2200); }
 function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
-function fmtTime(ms){ ms=Math.max(0,ms); const t=Math.round(ms/1000); const m=Math.floor(t/60); const s=t%60; return m+":"+String(s).padStart(2,"0"); }
-function remainingMs(){ if(!state||!state.timer) return 0; const t=state.timer; if(t.running&&t.endsAt){ return Math.max(0,t.endsAt-Date.now()); } return t.remainingMs||0; }
+function fmtTime(ms){ ms=Math.max(0,ms); const t=Math.round(ms/1000); return Math.floor(t/60)+":"+String(t%60).padStart(2,"0"); }
+function remainingMs(){ if(!state||!state.timer) return 0; const t=state.timer; return (t.running&&t.endsAt)?Math.max(0,t.endsAt-Date.now()):(t.remainingMs||0); }
 function joinURL(code){ return location.origin+"/?code="+code; }
+function heldSheetIndex(){ const h=(state&&state.holdings||[]).find(x=>x.participantId===me.participantId); return h?h.sheetIndex:-1; }
+function isTextFocused(){ const el=document.activeElement; if(!el) return false; const tag=el.tagName; return tag==="TEXTAREA"||(tag==="INPUT"&&/^(text|number|search)$/i.test(el.type||"text")); }
 
-// ---------------------------------------------------------------------------
-// Socket wiring
-// ---------------------------------------------------------------------------
-socket.on("state", (s)=>{ state=s; render(); });
-socket.on("connect", ()=>{ tryRejoin(); });
+socket.on("state",(s)=>{ state=s; render(); });
+socket.on("connect",()=>{ tryRejoin(); });
 
 function tryRejoin(){
-  const saved = loadLocal();
-  if(!saved || !saved.code) return;
-  if(saved.role==="facilitator" && saved.facilitatorToken){
-    socket.emit("facilitatorRejoin",{code:saved.code,token:saved.facilitatorToken},(r)=>{
-      if(r&&r.ok){ me=saved; state=r.state; render(); }
-      else { clearLocal(); }
-    });
-  } else if(saved.role==="participant" && saved.participantId){
-    socket.emit("joinSession",{code:saved.code,name:saved.name,participantId:saved.participantId},(r)=>{
-      if(r&&r.ok){ me=saved; state=r.state; render(); }
-      else { clearLocal(); }
-    });
+  const saved=loadLocal(); if(!saved||!saved.code) return;
+  if(saved.role==="facilitator"&&saved.facilitatorToken){
+    socket.emit("facilitatorRejoin",{code:saved.code,token:saved.facilitatorToken},(r)=>{ if(r&&r.ok){ me=saved; state=r.state; render(); } else clearLocal(); });
+  } else if(saved.role==="participant"&&saved.participantId){
+    socket.emit("joinSession",{code:saved.code,name:saved.name,participantId:saved.participantId},(r)=>{ if(r&&r.ok){ me=saved; state=r.state; render(); } else clearLocal(); });
   }
 }
 
-// ---------------------------------------------------------------------------
-// Actions
-// ---------------------------------------------------------------------------
-function createSession(need){
-  socket.emit("createSession",{need,rounds:null},(r)=>{
-    if(r&&r.ok){ me={role:"facilitator",code:r.code,facilitatorToken:r.facilitatorToken,participantId:null,name:null}; state=r.state; saveLocal(); render(); }
-    else toast("No se pudo crear la sala.");
-  });
-}
-function joinSession(code,name){
-  socket.emit("joinSession",{code:code.toUpperCase(),name},(r)=>{
-    if(r&&r.ok){ me={role:"participant",code:code.toUpperCase(),participantId:r.participantId,name,facilitatorToken:null}; state=r.state; saveLocal(); render(); }
-    else toast(r&&r.error?r.error:"No se pudo unir.");
-  });
-}
-function fac(event, extra, cb){ socket.emit(event, Object.assign({code:me.code,token:me.facilitatorToken},extra||{}), cb||function(){}); }
+function createSession(){ socket.emit("createSession",{},(r)=>{ if(r&&r.ok){ me={role:"facilitator",code:r.code,facilitatorToken:r.facilitatorToken,participantId:null,name:null}; state=r.state; saveLocal(); render(); } else toast("No se pudo crear la sala."); }); }
+function joinSession(code,name){ socket.emit("joinSession",{code:code.toUpperCase(),name},(r)=>{ if(r&&r.ok){ me={role:"participant",code:code.toUpperCase(),participantId:r.participantId,name,facilitatorToken:null}; state=r.state; saveLocal(); render(); } else toast(r&&r.error?r.error:"No se pudo unir."); }); }
+function fac(ev,extra,cb){ socket.emit(ev,Object.assign({code:me.code,token:me.facilitatorToken},extra||{}),cb||function(){}); }
+function sendContribution(text){ socket.emit("updateContribution",{code:me.code,participantId:me.participantId,text},(r)=>{ if(r&&r.ok){ saveState="ok"; updateSaveLabel(); } }); }
+function updateSaveLabel(){ const el=document.getElementById("saveLabel"); if(!el) return; el.textContent=saveState==="saving"?"Guardando…":saveState==="ok"?"Guardado ✓":""; el.className="save"+(saveState==="ok"?" ok":""); }
 
-function sendContribution(text){
-  socket.emit("updateContribution",{code:me.code,participantId:me.participantId,text},(r)=>{
-    if(r&&r.ok){ saveState="ok"; updateSaveLabel(); }
-  });
-}
-function updateSaveLabel(){
-  const el=document.getElementById("saveLabel");
-  if(!el) return;
-  el.textContent = saveState==="saving"?"Guardando…":saveState==="ok"?"Guardado ✓":"";
-  el.className = "save"+(saveState==="ok"?" ok":"");
+function stateKey(){
+  if(!state) return me.role||"land";
+  return [me.role,state.status,state.currentRound,state.resultsView,state.timer&&state.timer.running,state.votingOpen,heldSheetIndex()].join("|");
 }
 
-// ---------------------------------------------------------------------------
-// Render
-// ---------------------------------------------------------------------------
 function render(){
+  const key=stateKey();
+  if(key===lastKey && isTextFocused()) return;
+  const sy=window.scrollY;
+  lastKey=key;
   if(tick){ clearInterval(tick); tick=null; }
-  if(!me.role){ renderLanding(); return; }
-  if(me.role==="facilitator"){ renderFacilitator(); }
+  if(!me.role){ renderLanding(); }
+  else if(me.role==="facilitator"){ renderFacilitator(); }
   else { renderParticipant(); }
-  // timer ticking
-  if(state && state.status==="running"){
-    tick=setInterval(updateTimersOnly,250);
-  }
+  if(state && state.status==="running"){ tick=setInterval(updateTimersOnly,250); }
+  window.scrollTo(0,sy);
 }
+function updateTimersOnly(){ const rem=remainingMs(); document.querySelectorAll("[data-timer]").forEach(el=>{ el.textContent=fmtTime(rem); el.classList.toggle("low",rem<=15000&&rem>0); el.classList.toggle("paused",state.timer&&!state.timer.running); }); }
 
-function updateTimersOnly(){
-  const rem=remainingMs();
-  document.querySelectorAll("[data-timer]").forEach(el=>{
-    el.textContent=fmtTime(rem);
-    el.classList.toggle("low", rem<=15000 && rem>0);
-    el.classList.toggle("paused", state.timer && !state.timer.running);
-  });
-}
-
-// ---- Landing ----
 function renderLanding(){
-  const params=new URLSearchParams(location.search);
-  const prefill=(params.get("code")||"").toUpperCase();
-  app.innerHTML = `
+  const prefill=(new URLSearchParams(location.search).get("code")||"").toUpperCase();
+  app.innerHTML=`
     <p class="eyebrow">Momento 2 · Ideación</p>
     <h1>Brainwriting</h1>
-    <p class="sub">Qué herramienta podría resolverlo. Cada participante trabaja una hoja; las hojas rotan a la derecha en cada ronda.</p>
+    <p class="sub">Qué herramienta podría resolverlo. Priorizamos necesidades, las repartimos al azar y construimos ideas rotando las hojas.</p>
     <div class="grid cols2">
       <div class="card">
         <h2>Me sumo al taller</h2>
@@ -206,306 +201,302 @@ function renderLanding(){
       </div>
       <div class="card plain">
         <h2>Soy el facilitador</h2>
-        <p class="muted small">Creá una sala, definí la necesidad y controlá las rondas.</p>
-        <label>Necesidad a trabajar (podés editarla después)</label>
-        <textarea id="cNeed" placeholder="Escribí acá la necesidad que van a atacar…"></textarea>
+        <p class="muted small">Creá la sala. Adentro vas a poder priorizar las necesidades, repartirlas y controlar las rondas.</p>
         <div class="row" style="margin-top:14px"><button class="btn sec" id="cBtn">Crear sala</button></div>
       </div>
-    </div>
-  `;
-  document.getElementById("jBtn").onclick=()=>{
-    const code=document.getElementById("jCode").value.trim().toUpperCase();
-    const name=document.getElementById("jName").value.trim();
-    if(code.length<4){ showErr("jErr","Ingresá el código de 4 letras."); return; }
-    if(!name){ showErr("jErr","Ingresá tu nombre."); return; }
-    joinSession(code,name);
-  };
-  document.getElementById("cBtn").onclick=()=>{
-    createSession(document.getElementById("cNeed").value.trim());
-  };
+    </div>`;
+  document.getElementById("jBtn").onclick=()=>{ const c=document.getElementById("jCode").value.trim().toUpperCase(); const n=document.getElementById("jName").value.trim(); if(c.length<4){showErr("jErr","Ingresá el código de 4 letras.");return;} if(!n){showErr("jErr","Ingresá tu nombre.");return;} joinSession(c,n); };
+  document.getElementById("cBtn").onclick=()=>createSession();
   document.getElementById("jName").addEventListener("keydown",e=>{ if(e.key==="Enter") document.getElementById("jBtn").click(); });
 }
-function showErr(id,msg){ const e=document.getElementById(id); if(e){ e.textContent=msg; e.classList.remove("hidden"); } }
+function showErr(id,m){ const e=document.getElementById(id); if(e){ e.textContent=m; e.classList.remove("hidden"); } }
 
-// ---- Facilitador ----
 function renderFacilitator(){
-  const s=state;
-  const nP=s.participants.length;
-  const connected=s.participants.filter(p=>p.connected).length;
+  const s=state, nP=s.participants.length, conn=s.participants.filter(p=>p.connected).length;
   let body="";
   if(s.status==="lobby") body=facLobby(s);
-  else body=facRunning(s);
-
-  app.innerHTML = `
+  else if(s.status==="running") body=facRunning(s);
+  else body=facResults(s);
+  app.innerHTML=`
     <div class="row" style="margin-bottom:14px">
-      <div>
-        <p class="eyebrow" style="margin-bottom:2px">Facilitador · Sala</p>
-        <div class="code">${esc(s.code)}</div>
-      </div>
+      <div><p class="eyebrow" style="margin-bottom:2px">Facilitador · Sala</p><div class="code">${esc(s.code)}</div></div>
       <div class="spacer"></div>
-      <span class="pill"><span class="dot on"></span>${connected}/${nP} conectados</span>
+      <span class="pill"><span class="dot on"></span>${conn}/${nP} conectados</span>
       <button class="btn ghost sm" id="leaveBtn">Salir</button>
-    </div>
-    ${body}
-  `;
-  wireFac();
+    </div>${body}`;
+  const b=document.getElementById("leaveBtn"); if(b) b.onclick=leave;
+  if(s.status==="lobby") wireFacLobby();
+  else if(s.status==="running") wireFacRunning();
+  else wireFacResults();
 }
 
 function facLobby(s){
   const link=joinURL(s.code);
-  const qr="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data="+encodeURIComponent(link);
-  const plist = s.participants.length
-    ? s.participants.map(p=>`<span class="p"><span class="dot ${p.connected?'on':''}"></span>${esc(p.name)} <button class="btn ghost sm" data-remove="${p.id}" style="padding:0 4px;color:#c0392b">×</button></span>`).join("")
-    : `<span class="muted small">Todavía no se sumó nadie.</span>`;
-  const roundsEd = s.rounds.map((r,i)=>`
-    <div class="re">
-      <div><input type="text" data-rlabel="${i}" value="${esc(r.label)}" /></div>
-      <div><input type="number" data-rmin="${i}" min="1" max="60" step="0.5" value="${r.minutes}" title="minutos" /></div>
-    </div>`).join("");
+  const qr="https://api.qrserver.com/v1/create-qr-code/?size=170x170&data="+encodeURIComponent(link);
+  const plist=s.participants.length?s.participants.map(p=>`<span class="p"><span class="dot ${p.connected?'on':''}"></span>${esc(p.name)} <button class="btn ghost sm" data-remove="${p.id}" style="padding:0 4px;color:#c0392b">×</button></span>`).join(""):`<span class="muted small">Todavía no se sumó nadie.</span>`;
+  const byArea={}; s.needsPool.forEach(n=>{ (byArea[n.area]=byArea[n.area]||[]).push(n.text); });
+  let pool="";
+  Object.keys(byArea).forEach(area=>{
+    pool+=`<div class="area-h">${esc(area)}</div>`;
+    byArea[area].forEach(t=>{ const sel=s.selectedNeeds.includes(t); pool+=`<label class="need-item ${sel?'sel':''}"><input type="checkbox" data-need="${esc(t)}" ${sel?'checked':''}/><span class="t">${esc(t)}</span></label>`; });
+  });
+  const nSel=s.selectedNeeds.length, nP=s.participants.length;
+  let hint="";
+  if(nSel>0&&nP>=2){ if(nSel===nP) hint="Una necesidad por persona."; else if(nSel<nP) hint="Hay menos necesidades que personas: algunas arrancarán en más de una hoja."; else hint="Hay más necesidades que personas: se usarán "+nP+" al azar."; }
+  const roundsEd=s.rounds.map((r,i)=>`<div class="re"><input type="text" data-rlabel="${i}" value="${esc(r.label)}"/><input type="number" data-rmin="${i}" min="1" max="60" step="0.5" value="${r.minutes}"/></div>`).join("");
   return `
     <div class="grid cols2">
-      <div class="card">
-        <h2>Compartí el acceso</h2>
-        <p class="muted small">Que cada participante escanee el QR o entre a la sala con el código.</p>
-        <div class="row" style="align-items:flex-start">
-          <img src="${qr}" alt="QR" width="150" height="150" style="border-radius:10px;background:#fff" onerror="this.style.display='none'"/>
-          <div style="flex:1;min-width:200px">
-            <label>Link para participantes</label>
-            <div class="linkbox"><input id="joinLink" type="text" readonly value="${esc(link)}"/><button class="btn sm" id="copyLink">Copiar</button></div>
-            <p class="muted small" style="margin-top:10px">O entran manualmente con el código <b>${esc(s.code)}</b>.</p>
-          </div>
-        </div>
-      </div>
-      <div class="card plain">
-        <h2>Participantes (${s.participants.length})</h2>
-        <div class="plist" id="plist">${plist}</div>
-      </div>
+      <div class="card"><h2>Compartí el acceso</h2><p class="muted small">Escaneando el QR o con el código.</p>
+        <div class="row" style="align-items:flex-start"><img src="${qr}" width="140" height="140" style="border-radius:10px;background:#fff" onerror="this.style.display='none'"/>
+          <div style="flex:1;min-width:200px"><label>Link para participantes</label><div class="linkbox"><input id="joinLink" type="text" readonly value="${esc(link)}"/><button class="btn sm" id="copyLink">Copiar</button></div><p class="muted small" style="margin-top:10px">Código: <b>${esc(s.code)}</b></p></div>
+        </div></div>
+      <div class="card plain"><h2>Participantes (${s.participants.length})</h2><div class="plist" id="plist">${plist}</div></div>
     </div>
-
-    <div class="card">
-      <h2>Necesidad a trabajar</h2>
-      <textarea id="needEdit" placeholder="Escribí la necesidad…">${esc(s.need)}</textarea>
-      <div class="row" style="margin-top:10px"><button class="btn sec sm" id="saveNeed">Guardar necesidad</button></div>
+    <div class="card"><div class="selbar row"><b>Necesidades elegidas: ${nSel}</b><span class="muted small">${esc(hint)}</span></div>
+      <h2>Priorización — elegí las de más potencial</h2>
+      <p class="muted small">Tildá las necesidades a trabajar. Podés sumar una nueva abajo.</p>
+      <div>${pool}</div>
+      <div class="row" style="margin-top:10px"><input id="customNeed" type="text" maxlength="240" placeholder="Agregar una necesidad nueva…" style="flex:1;min-width:220px"/><button class="btn sec sm" id="addNeed">Agregar</button></div>
     </div>
-
-    <div class="card plain">
-      <h2>Rondas</h2>
-      <p class="muted small">Nombre y duración (min) de cada ronda. Por defecto: 3 rondas de 4 min.</p>
-      <div class="rounds-edit" id="roundsEdit">${roundsEd}</div>
-      <div class="row"><button class="btn sec sm" id="saveRounds">Guardar rondas</button></div>
-    </div>
-
-    <div class="row" style="margin-top:6px">
-      <button class="btn" id="startBtn" ${s.participants.length<2?'disabled':''}>Arrancar taller</button>
-      ${s.participants.length<2?'<span class="muted small">Necesitás 2+ participantes.</span>':''}
-    </div>
-  `;
+    <div class="card plain"><h2>Rondas</h2><p class="muted small">Por defecto: 4 rondas de 4 min.</p><div class="rounds-edit">${roundsEd}</div><button class="btn sec sm" id="saveRounds">Guardar rondas</button></div>
+    <div class="row"><button class="btn" id="startBtn" ${(nSel<1||nP<2)?'disabled':''}>Asignar al azar y arrancar</button>${(nP<2)?'<span class="muted small">Necesitás 2+ participantes.</span>':(nSel<1?'<span class="muted small">Elegí al menos una necesidad.</span>':'')}</div>`;
+}
+function wireFacLobby(){
+  const cp=document.getElementById("copyLink"); if(cp) cp.onclick=()=>{ const i=document.getElementById("joinLink"); i.select(); navigator.clipboard&&navigator.clipboard.writeText(i.value); toast("Link copiado"); };
+  document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=(e)=>{ e.preventDefault(); fac("removeParticipant",{participantId:b.getAttribute("data-remove")}); });
+  document.querySelectorAll("[data-need]").forEach(chk=>chk.onchange=()=>{ const chosen=[...document.querySelectorAll("[data-need]")].filter(c=>c.checked).map(c=>c.getAttribute("data-need")); fac("setSelectedNeeds",{needs:chosen}); });
+  const add=document.getElementById("addNeed"); if(add) add.onclick=()=>{ const inp=document.getElementById("customNeed"); const t=inp.value.trim(); if(t){ fac("addCustomNeed",{text:t}); inp.value=""; } };
+  const sr=document.getElementById("saveRounds"); if(sr) sr.onclick=()=>{ const rounds=state.rounds.map((r,i)=>({label:(document.querySelector('[data-rlabel="'+i+'"]')||{}).value||r.label,minutes:parseFloat((document.querySelector('[data-rmin="'+i+'"]')||{}).value)||r.minutes,prompt:r.prompt})); fac("setRounds",{rounds},(x)=>toast(x&&x.ok?"Rondas guardadas":"Error")); };
+  const st=document.getElementById("startBtn"); if(st) st.onclick=()=>fac("startWorkshop",{},(r)=>{ if(r&&!r.ok) toast(r.error||"No se pudo arrancar."); });
 }
 
 function facRunning(s){
-  const finished = s.status==="finished";
-  const r = s.rounds[s.currentRound-1] || {};
-  const segs = s.rounds.map((_,i)=>`<div class="seg ${i<s.currentRound-1||finished?'done':(i===s.currentRound-1?'cur':'')}"></div>`).join("");
-  const control = finished ? `
-      <div class="row"><span class="tag">Taller terminado</span></div>
-      <div class="row" style="margin-top:12px">
-        <button class="btn" id="expMd">Descargar (.md)</button>
-        <button class="btn sec" id="expCsv">Descargar (.csv)</button>
-        <button class="btn sec" id="expJson">Descargar (.json)</button>
-        <div class="spacer"></div>
-        <button class="btn ghost sm" id="resetBtn">Reiniciar (nueva necesidad)</button>
-      </div>` : `
-      <div class="row">
-        <div class="timer" data-timer>${fmtTime(remainingMs())}</div>
-        <div class="spacer"></div>
-        ${s.timer.running
-          ? `<button class="btn sec" id="pauseBtn">⏸ Pausar</button>`
-          : `<button class="btn" id="resumeBtn" ${(s.timer.remainingMs||0)<=0?'disabled':''}>▶ Reanudar</button>`}
-        <button class="btn sec sm" id="restartTimer">↻ Reiniciar tiempo</button>
-      </div>
-      <div class="row" style="margin-top:14px">
-        <button class="btn" id="nextBtn">${s.currentRound>=s.totalRounds?'Terminar taller':'Siguiente ronda →'}</button>
-        <button class="btn danger sm" id="finishBtn">Terminar ya</button>
-        <div class="spacer"></div>
-        <button class="btn sec sm" id="expMd2">Exportar</button>
-      </div>`;
-
+  const r=s.rounds[s.currentRound-1]||{};
+  const segs=s.rounds.map((_,i)=>`<div class="seg ${i<s.currentRound-1?'done':(i===s.currentRound-1?'cur':'')}"></div>`).join("");
   return `
-    <div class="card">
-      <div class="row"><span class="tag">${finished?'Cerrado':esc(r.label||'')}</span><span class="muted small">Ronda ${Math.min(s.currentRound,s.totalRounds)} de ${s.totalRounds}</span></div>
+    <div class="card"><div class="row"><span class="tag">${esc(r.label||'')}</span><span class="muted small">Ronda ${s.currentRound} de ${s.totalRounds}</span></div>
       <div class="progress">${segs}</div>
-      <div class="need" style="margin:14px 0 10px">${esc(s.need)}</div>
-      ${!finished&&r.prompt?`<p class="prompt muted">${esc(r.prompt)}</p>`:''}
-      ${control}
+      ${r.prompt?`<p class="prompt muted" style="margin-top:12px">${esc(r.prompt)}</p>`:''}
+      <div class="row" style="margin-top:8px"><div class="timer" data-timer>${fmtTime(remainingMs())}</div><div class="spacer"></div>
+        ${s.timer.running?`<button class="btn sec" id="pauseBtn">⏸ Pausar</button>`:`<button class="btn" id="resumeBtn" ${(s.timer.remainingMs||0)<=0?'disabled':''}>▶ Reanudar</button>`}
+        <button class="btn sec sm" id="restartTimer">↻ Reiniciar tiempo</button></div>
+      <div class="row" style="margin-top:14px"><button class="btn" id="nextBtn">${s.currentRound>=s.totalRounds?'Terminar → resultados':'Siguiente ronda →'}</button><button class="btn danger sm" id="finishBtn">Terminar ya</button></div>
     </div>
     <h2 style="margin:18px 0 8px">Hojas en vivo</h2>
-    <div class="grid cols3" id="sheets">${renderSheets(s)}</div>
-  `;
+    <div class="grid cols3">${renderSheets(s)}</div>`;
 }
-
 function renderSheets(s){
   const nameOf={}; s.participants.forEach(p=>nameOf[p.id]=p.name);
-  const holderByIndex={};
-  (s.holdings||[]).forEach(h=>{ holderByIndex[h.sheetIndex]=h.participantId; });
+  const holderByIndex={}; (s.holdings||[]).forEach(h=>holderByIndex[h.sheetIndex]=h.participantId);
   return s.sheets.map((sheet,idx)=>{
     const layers=[...sheet.contributions].sort((a,b)=>a.round-b.round);
     const holder=holderByIndex[idx];
-    const body = layers.length
-      ? layers.map(c=>`<div class="layer"><div class="who">R${c.round} · ${esc(c.name)}</div><div class="txt">${esc(c.text)||'<span class="muted">—</span>'}</div></div>`).join("")
-      : `<span class="muted small">Sin aportes todavía.</span>`;
-    return `<div class="sheet">
-      <h3>Hoja ${idx+1}${holder&&s.status==="running"?` · ahora: ${esc(nameOf[holder]||'')}`:''}</h3>
-      ${body}
-    </div>`;
+    const body=layers.length?layers.map(c=>`<div class="layer"><div class="who">R${c.round} · ${esc(c.name)}</div><div class="txt">${esc(c.text)||'—'}</div></div>`).join(""):`<span class="muted small">Sin aportes todavía.</span>`;
+    return `<div class="sheet"><div class="need" style="margin-bottom:10px">${esc(sheet.need)}</div><h3 style="color:var(--muted)">Hoja ${idx+1}${holder?` · ahora: ${esc(nameOf[holder]||'')}`:''}</h3>${body}</div>`;
   }).join("");
 }
-
-function wireFac(){
-  const lb=document.getElementById("leaveBtn"); if(lb) lb.onclick=leave;
-  const cp=document.getElementById("copyLink"); if(cp) cp.onclick=()=>{ const i=document.getElementById("joinLink"); i.select(); navigator.clipboard&&navigator.clipboard.writeText(i.value); toast("Link copiado"); };
-  const sn=document.getElementById("saveNeed"); if(sn) sn.onclick=()=>{ fac("setNeed",{need:document.getElementById("needEdit").value}); toast("Necesidad guardada"); };
-  const sr=document.getElementById("saveRounds"); if(sr) sr.onclick=saveRounds;
-  document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>fac("removeParticipant",{participantId:b.getAttribute("data-remove")}));
-  const st=document.getElementById("startBtn"); if(st) st.onclick=()=>fac("startWorkshop",{},(r)=>{ if(r&&!r.ok) toast(r.error||"No se pudo arrancar."); });
+function wireFacRunning(){
   const pb=document.getElementById("pauseBtn"); if(pb) pb.onclick=()=>fac("pauseTimer");
   const rb=document.getElementById("resumeBtn"); if(rb) rb.onclick=()=>fac("resumeTimer");
   const rt=document.getElementById("restartTimer"); if(rt) rt.onclick=()=>fac("restartRoundTimer");
   const nb=document.getElementById("nextBtn"); if(nb) nb.onclick=()=>fac("nextRound");
-  const fb=document.getElementById("finishBtn"); if(fb) fb.onclick=()=>{ if(confirm("¿Terminar el taller ahora?")) fac("finishWorkshop"); };
-  const rs=document.getElementById("resetBtn"); if(rs) rs.onclick=()=>{ if(confirm("¿Reiniciar? Se limpian las hojas (los participantes quedan).")) fac("resetWorkshop",{keepParticipants:true}); };
-  const e1=document.getElementById("expMd"); if(e1) e1.onclick=()=>exportMd();
-  const e2=document.getElementById("expCsv"); if(e2) e2.onclick=()=>exportCsv();
-  const e3=document.getElementById("expJson"); if(e3) e3.onclick=()=>exportJson();
-  const e4=document.getElementById("expMd2"); if(e4) e4.onclick=()=>exportMd();
+  const fb=document.getElementById("finishBtn"); if(fb) fb.onclick=()=>{ if(confirm("¿Terminar el brainwriting y pasar a resultados?")) fac("finishWorkshop"); };
 }
 
-function saveRounds(){
-  const rounds=state.rounds.map((r,i)=>({
-    label:(document.querySelector(`[data-rlabel="${i}"]`)||{}).value||r.label,
-    minutes:parseFloat((document.querySelector(`[data-rmin="${i}"]`)||{}).value)||r.minutes,
-    prompt:r.prompt
-  }));
-  fac("setRounds",{rounds},(r)=>{ if(r&&!r.ok) toast(r.error||"No se pudo."); else toast("Rondas guardadas"); });
+function facResults(s){
+  const tabs=[["mural","Mural"],["vote","Votación"],["matrix","Matriz Impacto/Factibilidad"],["skeptic","Cliente escéptico"]];
+  const tabHtml=tabs.map(([k,l])=>`<div class="tab ${s.resultsView===k?'active':''}" data-view="${k}">${l}</div>`).join("");
+  let content="";
+  if(s.resultsView==="mural") content=muralHtml(s,true);
+  else if(s.resultsView==="vote") content=voteFacHtml(s);
+  else if(s.resultsView==="matrix") content=matrixHtml(s,true);
+  else content=skepticHtml(s);
+  return `
+    <div class="row" style="margin-bottom:6px"><span class="tag">Resultados</span><span class="muted small">El brainwriting terminó · ${s.sheets.length} necesidades</span>
+      <div class="spacer"></div>
+      <button class="btn sec sm" id="expMd">Descargar .md</button><button class="btn sec sm" id="expCsv">.csv</button><button class="btn sec sm" id="expJson">.json</button>
+      <button class="btn ghost sm" id="resetBtn">Reiniciar</button></div>
+    <div class="tabs">${tabHtml}</div>
+    ${content}`;
+}
+function wireFacResults(){
+  document.querySelectorAll("[data-view]").forEach(t=>t.onclick=()=>fac("setResultsView",{view:t.getAttribute("data-view")}));
+  const e1=document.getElementById("expMd"); if(e1) e1.onclick=exportMd;
+  const e2=document.getElementById("expCsv"); if(e2) e2.onclick=exportCsv;
+  const e3=document.getElementById("expJson"); if(e3) e3.onclick=exportJson;
+  const rs=document.getElementById("resetBtn"); if(rs) rs.onclick=()=>{ if(confirm("¿Reiniciar? Se limpian hojas, votos y matriz (quedan los participantes).")) fac("resetWorkshop",{keepParticipants:true}); };
+  if(state.resultsView==="vote") wireVoteFac();
+  if(state.resultsView==="matrix") wireMatrix(true);
+  if(state.resultsView==="skeptic") wireSkeptic();
 }
 
-// ---- Participante ----
+function muralHtml(s,withVotes){
+  const tally=s.voteTally||{};
+  const cols=s.sheets.map((sheet,idx)=>{
+    const layers=[...sheet.contributions].sort((a,b)=>a.round-b.round);
+    const posts=layers.length?layers.map(c=>`<div class="postit"><div class="r">Ronda ${c.round} · ${esc(c.name)}</div><div class="x">${esc(c.text)||'—'}</div></div>`).join(""):`<span class="muted small">Sin aportes.</span>`;
+    const v=tally[sheet.id]||0;
+    const badge=(withVotes&&v>0)?`<span class="votebadge">★ ${v}</span>`:"";
+    const area=areaOf(s,sheet.need);
+    return `<div class="mcol" style="background:${areaColor(area)}"><div class="mneed">${esc(sheet.need)} ${badge}</div><div class="marea">${esc(area||'')}</div>${posts}</div>`;
+  }).join("");
+  return `<div class="mural">${cols}</div>`;
+}
+function areaOf(s,needText){ const n=(s.needsPool||[]).find(x=>x.text===needText); return n?n.area:""; }
+
+function voteFacHtml(s){
+  const tally=s.voteTally||{}; const max=Math.max(1,...Object.values(tally));
+  const rows=[...s.sheets].sort((a,b)=>(tally[b.id]||0)-(tally[a.id]||0)).map(sheet=>{
+    const v=tally[sheet.id]||0;
+    return `<div class="votecard"><div class="cnt">${v}</div><div class="barwrap"><div class="bar" style="width:${Math.round(v/max*100)}%"></div></div><div style="flex:2">${esc(sheet.need)}</div></div>`;
+  }).join("");
+  const votersDone=Object.keys(s.votes||{}).filter(pid=>(s.votes[pid]||[]).length>0).length;
+  return `
+    <div class="card plain"><div class="row"><h2>Votación de ideas</h2><div class="spacer"></div>
+      <span class="pill">${s.votesPerPerson} votos c/u</span>
+      <button class="btn sm" id="votesMinus">−</button><button class="btn sm" id="votesPlus">+</button>
+      <button class="btn ${s.votingOpen?'on':''}" id="toggleVote">${s.votingOpen?'Cerrar votación':'Abrir votación'}</button></div>
+      <p class="muted small">${s.votingOpen?'Abierta — los participantes ya pueden votar desde su dispositivo.':'Cerrada.'} Votaron ${votersDone} de ${s.participants.length}.</p></div>
+    ${rows}`;
+}
+function wireVoteFac(){
+  const t=document.getElementById("toggleVote"); if(t) t.onclick=()=>fac("setVotingOpen",{open:!state.votingOpen});
+  const m=document.getElementById("votesMinus"); if(m) m.onclick=()=>fac("setVotesPerPerson",{n:state.votesPerPerson-1});
+  const p=document.getElementById("votesPlus"); if(p) p.onclick=()=>fac("setVotesPerPerson",{n:state.votesPerPerson+1});
+}
+
+function matrixHtml(s,isFac){
+  const placed=s.matrix||{};
+  const cards=s.sheets.map((sheet)=>{
+    const area=areaOf(s,sheet.need);
+    if(placed[sheet.id]){ const {x,y}=placed[sheet.id]; return `<div class="mcard ${selectedCard===sheet.id?'sel':''}" data-card="${sheet.id}" style="left:${x*100}%;top:${(1-y)*100}%;background:${areaColor(area)}">${esc(shortNeed(sheet.need))}</div>`; }
+    return "";
+  }).join("");
+  const tray=s.sheets.filter(sheet=>!placed[sheet.id]).map(sheet=>`<div class="traycard ${selectedCard===sheet.id?'sel':''}" data-card="${sheet.id}" style="background:${areaColor(areaOf(s,sheet.need))}">${esc(shortNeed(sheet.need))}</div>`).join("");
+  const help=isFac?`<p class="muted small">Tocá una tarjeta y después el lugar del cuadrante donde va. Para sacarla, tocala y usá “Quitar del tablero”.</p>`:`<p class="muted small">El facilitador está ubicando las ideas.</p>`;
+  const removeBtn=(isFac&&selectedCard&&placed[selectedCard])?`<button class="btn sec sm" id="mRemove">Quitar del tablero</button>`:"";
+  return `
+    <div class="card plain"><h2>Impacto vs Factibilidad</h2>${help}
+      <div class="matrix-wrap">
+        <div class="row" style="justify-content:center;margin-bottom:4px"><span class="axlabel">▲ Más impacto</span></div>
+        <div class="mgrid" id="mgrid">
+          <div class="axis-v"></div><div class="axis-h"></div>
+          <div class="quad q-tl">Apuestas grandes</div><div class="quad q-tr">Quick wins</div>
+          <div class="quad q-bl">Descartar</div><div class="quad q-br">Mejoras rápidas</div>
+          ${cards}
+        </div>
+        <div class="row" style="justify-content:space-between;margin-top:4px"><span class="axlabel">Menos factible ◀</span><span class="axlabel">▶ Más factible</span></div>
+      </div>
+      ${isFac?`<div class="row" style="margin-top:10px">${removeBtn}</div><h3 style="margin-top:12px">Sin ubicar</h3><div class="tray" id="mtray">${tray||'<span class="muted small">Todas ubicadas.</span>'}</div>`:''}
+    </div>`;
+}
+function shortNeed(t){ t=String(t||""); return t.length>46?t.slice(0,44)+"…":t; }
+function wireMatrix(isFac){
+  if(!isFac) return;
+  document.querySelectorAll("[data-card]").forEach(el=>el.onclick=(e)=>{ e.stopPropagation(); const id=el.getAttribute("data-card"); selectedCard=(selectedCard===id)?null:id; lastKey=null; render(); });
+  const grid=document.getElementById("mgrid");
+  if(grid) grid.onclick=(e)=>{ if(!selectedCard) return; const r=grid.getBoundingClientRect(); const x=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width)); const y=Math.min(1,Math.max(0,1-(e.clientY-r.top)/r.height)); const sid=selectedCard; selectedCard=null; fac("setMatrixPos",{sheetId:sid,x,y}); };
+  const rm=document.getElementById("mRemove"); if(rm) rm.onclick=()=>{ const sid=selectedCard; selectedCard=null; fac("setMatrixPos",{sheetId:sid,x:null,y:null}); };
+}
+
+function skepticHtml(s){
+  if(!skepticLocal.sheetId && s.sheets[0]) skepticLocal.sheetId=s.sheets[0].id;
+  const opts=s.sheets.map((sheet)=>`<option value="${sheet.id}" ${skepticLocal.sheetId===sheet.id?'selected':''}>${esc(shortNeed(sheet.need))}</option>`).join("");
+  const roleOpts=ROLES.map(r=>`<option ${skepticLocal.rol===r?'selected':''}>${esc(r)}</option>`).join("");
+  const roleFree=skepticLocal.rol==="Otro (escribir)";
+  return `
+    <div class="card plain"><h2>Cliente escéptico</h2>
+      <p class="muted small">Armá el prompt, copialo y pegalo en tu cuenta de IA (ChatGPT, Claude, etc.). Cada uno lo corre por su lado.</p>
+      <div class="grid cols2">
+        <div><label>Necesidad / idea a testear</label><select id="skSheet">${opts}</select></div>
+        <div><label>Rol del cliente</label><select id="skRol">${roleOpts}</select>${roleFree?`<input id="skRolFree" type="text" placeholder="Escribí el rol" style="margin-top:8px" value="${esc(skepticLocal.rolFree||'')}"/>`:''}</div>
+      </div>
+      <label style="margin-top:12px">Cliente concreto</label><input id="skCliente" type="text" placeholder="Ej: una cadena de retail regional" value="${esc(skepticLocal.cliente)}"/>
+      <label style="margin-top:12px">Descripción de la herramienta (en tres líneas)</label><textarea id="skDesc" placeholder="Describí en 3 líneas la herramienta/servicio que proponen…">${esc(skepticLocal.desc)}</textarea>
+      <label style="margin-top:12px">Prompt listo</label>
+      <div class="promptbox" id="skPrompt">${esc(buildPrompt(s))}</div>
+      <div class="row" style="margin-top:10px"><button class="btn" id="skCopy">Copiar prompt</button></div>
+    </div>`;
+}
+function currentRol(){ return skepticLocal.rol==="Otro (escribir)"?(skepticLocal.rolFree||"[rol]"):skepticLocal.rol; }
+function buildPrompt(s){
+  const sheet=(s.sheets||[]).find(x=>x.id===skepticLocal.sheetId)||s.sheets[0]||{};
+  const desc=skepticLocal.desc.trim()||("(describí la herramienta para la necesidad: "+(sheet.need||"")+")");
+  const cliente=skepticLocal.cliente.trim()||"[cliente concreto]";
+  return `Sos el ${currentRol()} de ${cliente}, que ya trabajó con nosotros. Te presentamos esta herramienta: ${desc} Dame tus cinco objeciones principales y qué necesitarías ver para aprobarla.`;
+}
+function wireSkeptic(){
+  const refresh=()=>{ const box=document.getElementById("skPrompt"); if(box) box.textContent=buildPrompt(state); };
+  const sh=document.getElementById("skSheet"); if(sh) sh.onchange=()=>{ skepticLocal.sheetId=sh.value; refresh(); };
+  const ro=document.getElementById("skRol"); if(ro) ro.onchange=()=>{ skepticLocal.rol=ro.value; lastKey=null; render(); };
+  const rf=document.getElementById("skRolFree"); if(rf) rf.oninput=()=>{ skepticLocal.rolFree=rf.value; refresh(); };
+  const cl=document.getElementById("skCliente"); if(cl) cl.oninput=()=>{ skepticLocal.cliente=cl.value; refresh(); };
+  const de=document.getElementById("skDesc"); if(de) de.oninput=()=>{ skepticLocal.desc=de.value; refresh(); };
+  const cp=document.getElementById("skCopy"); if(cp) cp.onclick=()=>{ const txt=buildPrompt(state); if(navigator.clipboard) navigator.clipboard.writeText(txt); toast("Prompt copiado"); };
+}
+
 function renderParticipant(){
   const s=state;
-  if(s.status==="lobby"){ renderParticipantLobby(s); return; }
-  if(s.status==="finished"){ renderParticipantFinished(s); return; }
-
+  if(s.status==="lobby"){ partLobby(s); return; }
+  if(s.status==="results"){ partResults(s); return; }
   const holding=(s.holdings||[]).find(h=>h.participantId===me.participantId);
   const r=s.rounds[s.currentRound-1]||{};
-  const sheet = holding ? s.sheets[holding.sheetIndex] : null;
-  const priorLayers = sheet ? sheet.contributions.filter(c=>c.round<s.currentRound).sort((a,b)=>a.round-b.round) : [];
-  const mine = sheet ? sheet.contributions.find(c=>c.round===s.currentRound && c.participantId===me.participantId) : null;
-  const running = s.timer.running && remainingMs()>0;
-
-  // preservar draft local mientras se tipea
-  const currentVal = (document.activeElement && document.activeElement.id==="myText")
-      ? document.getElementById("myText").value
-      : (mine? mine.text : "");
-
-  const priorHtml = priorLayers.length
-    ? priorLayers.map(c=>`<div class="layer"><div class="who">Ronda ${c.round} · ${esc(c.name)}</div><div class="txt">${esc(c.text)||'—'}</div></div>`).join("")
-    : (s.currentRound>1?`<span class="muted small">Esta hoja llegó sin aportes previos.</span>`:"");
-
-  app.innerHTML = `
-    <div class="row" style="margin-bottom:12px">
-      <div><p class="eyebrow" style="margin-bottom:2px">${esc(me.name||'')}</p><h1 style="font-size:24px;margin:0">Sala ${esc(s.code)}</h1></div>
-      <div class="spacer"></div>
-      <div class="timer" data-timer style="font-size:40px">${fmtTime(remainingMs())}</div>
-    </div>
-    <div class="card">
-      <div class="row"><span class="tag">${esc(r.label||'')}</span><span class="muted small">Ronda ${s.currentRound} de ${s.totalRounds}</span></div>
-      <div class="need" style="margin:12px 0">${esc(s.need)}</div>
-      <p class="prompt">${esc(r.prompt||'')}</p>
-    </div>
-
+  const sheet=holding?s.sheets[holding.sheetIndex]:null;
+  const prior=sheet?sheet.contributions.filter(c=>c.round<s.currentRound).sort((a,b)=>a.round-b.round):[];
+  const mine=sheet?sheet.contributions.find(c=>c.round===s.currentRound&&c.participantId===me.participantId):null;
+  const running=s.timer.running&&remainingMs()>0;
+  const priorHtml=prior.length?prior.map(c=>`<div class="layer"><div class="who">Ronda ${c.round} · ${esc(c.name)}</div><div class="txt">${esc(c.text)||'—'}</div></div>`).join(""):(s.currentRound>1?`<span class="muted small">Esta hoja llegó sin aportes previos.</span>`:"");
+  app.innerHTML=`
+    <div class="row" style="margin-bottom:12px"><div><p class="eyebrow" style="margin-bottom:2px">${esc(me.name||'')}</p><h1 style="font-size:22px;margin:0">Sala ${esc(s.code)}</h1></div><div class="spacer"></div><div class="timer" data-timer style="font-size:38px">${fmtTime(remainingMs())}</div></div>
+    <div class="card"><div class="row"><span class="tag">${esc(r.label||'')}</span><span class="muted small">Ronda ${s.currentRound} de ${s.totalRounds}</span></div>
+      <div class="need" style="margin:12px 0">${esc(sheet?sheet.need:'')}</div><p class="prompt">${esc(r.prompt||'')}</p></div>
     ${s.currentRound>1?`<h2 style="margin:16px 0 8px">Lo que ya tiene la hoja</h2><div>${priorHtml}</div>`:''}
-
-    <div class="card plain">
-      <label>${s.currentRound===1?'Tus 3 ideas':'Tu aporte de esta ronda'}</label>
-      <textarea id="myText" ${running?'':'disabled'} placeholder="${running?'Escribí acá…':'Esperando a que arranque la ronda…'}">${esc(currentVal)}</textarea>
-      <div class="row" style="margin-top:6px"><span class="save" id="saveLabel"></span><div class="spacer"></div>${!running?'<span class="muted small">La ronda está pausada o terminó.</span>':''}</div>
-    </div>
-    <div class="row" style="margin-top:6px"><button class="btn ghost sm" id="leaveBtn">Salir</button></div>
-  `;
+    <div class="card plain"><label>${s.currentRound===1?'Tus 3 ideas':'Tu aporte de esta ronda'}</label>
+      <textarea id="myText" ${running?'':'disabled'} placeholder="${running?'Escribí acá…':'Esperá a que arranque/reanude la ronda…'}">${esc(mine?mine.text:'')}</textarea>
+      <div class="row" style="margin-top:6px"><span class="save" id="saveLabel"></span><div class="spacer"></div>${!running?'<span class="muted small">La ronda está pausada o terminó.</span>':''}</div></div>
+    <div class="row"><button class="btn ghost sm" id="leaveBtn">Salir</button></div>`;
   const ta=document.getElementById("myText");
-  if(ta){
-    ta.oninput=()=>{
-      saveState="saving"; updateSaveLabel();
-      clearTimeout(saveTimer);
-      saveTimer=setTimeout(()=>sendContribution(ta.value),400);
-    };
-    ta.onblur=()=>{ clearTimeout(saveTimer); sendContribution(ta.value); };
-  }
+  if(ta){ ta.oninput=()=>{ saveState="saving"; updateSaveLabel(); clearTimeout(saveTimer); saveTimer=setTimeout(()=>sendContribution(ta.value),400); }; ta.onblur=()=>{ clearTimeout(saveTimer); sendContribution(ta.value); }; }
   document.getElementById("leaveBtn").onclick=leave;
 }
-
-function renderParticipantLobby(s){
+function partLobby(s){
   const plist=s.participants.map(p=>`<span class="p"><span class="dot ${p.connected?'on':''}"></span>${esc(p.name)}</span>`).join("");
-  app.innerHTML=`
-    <p class="eyebrow">${esc(me.name||'')} · Sala ${esc(s.code)}</p>
-    <h1>¡Estás dentro!</h1>
-    <p class="sub">Esperá a que el facilitador arranque el taller.</p>
-    ${s.need?`<div class="card"><h2>Necesidad</h2><div class="need">${esc(s.need)}</div></div>`:''}
+  app.innerHTML=`<p class="eyebrow">${esc(me.name||'')} · Sala ${esc(s.code)}</p><h1>¡Estás dentro!</h1><p class="sub">El equipo está priorizando las necesidades. Esperá a que el facilitador arranque.</p>
     <div class="card plain"><h2>En la sala (${s.participants.length})</h2><div class="plist">${plist}</div></div>
-    <div class="row"><button class="btn ghost sm" id="leaveBtn">Salir</button></div>
-  `;
+    <div class="row"><button class="btn ghost sm" id="leaveBtn">Salir</button></div>`;
   document.getElementById("leaveBtn").onclick=leave;
 }
+function partResults(s){
+  let content="";
+  if(s.resultsView==="mural") content=muralHtml(s,true);
+  else if(s.resultsView==="vote") content=votePartHtml(s);
+  else if(s.resultsView==="matrix") content=matrixHtml(s,false);
+  else content=skepticHtml(s);
+  app.innerHTML=`<div class="row" style="margin-bottom:12px"><div><p class="eyebrow" style="margin-bottom:2px">${esc(me.name||'')} · Sala ${esc(s.code)}</p><h1 style="font-size:22px;margin:0">Resultados</h1></div><div class="spacer"></div><button class="btn ghost sm" id="leaveBtn">Salir</button></div>${content}`;
+  const lb=document.getElementById("leaveBtn"); if(lb) lb.onclick=leave;
+  if(s.resultsView==="vote") wireVotePart();
+  if(s.resultsView==="skeptic") wireSkeptic();
+}
+function votePartHtml(s){
+  const mine=(s.votes&&s.votes[me.participantId])||[];
+  const left=s.votesPerPerson-mine.length;
+  if(!s.votingOpen) return `<div class="card"><h2>Votación</h2><p class="muted">La votación todavía no está abierta. Esperá al facilitador.</p></div>`;
+  const cards=s.sheets.map(sheet=>{ const picked=mine.includes(sheet.id); return `<div class="votecard ${picked?'picked':''}" data-vote="${sheet.id}"><div class="vcheck ${picked?'on':''}">${picked?'✓':''}</div><div style="flex:1">${esc(sheet.need)}</div></div>`; }).join("");
+  return `<div class="card"><h2>Elegí tus favoritas</h2><p class="muted small">Tenés <b>${s.votesPerPerson}</b> votos. Te quedan <b>${left}</b>.</p></div>${cards}`;
+}
+function wireVotePart(){ document.querySelectorAll("[data-vote]").forEach(el=>el.onclick=()=>socket.emit("castVote",{code:me.code,participantId:me.participantId,sheetId:el.getAttribute("data-vote")},(r)=>{ if(r&&!r.ok&&r.error) toast(r.error); })); }
 
-function renderParticipantFinished(s){
-  app.innerHTML=`
-    <p class="eyebrow">Sala ${esc(s.code)}</p>
-    <h1>¡Listo! 🎉</h1>
-    <p class="sub">Terminó el brainwriting. El facilitador tiene todas las hojas para la próxima etapa.</p>
-    <div class="row"><button class="btn ghost sm" id="leaveBtn">Salir</button></div>
-  `;
-  document.getElementById("leaveBtn").onclick=leave;
-}
+function leave(){ clearLocal(); me={role:null,code:null,facilitatorToken:null,participantId:null,name:null}; state=null; lastKey=null; history.replaceState(null,"","/"); render(); }
 
-function leave(){ clearLocal(); me={role:null,code:null,facilitatorToken:null,participantId:null,name:null}; state=null; history.replaceState(null,"","/"); render(); }
+function download(name,content,type){ const b=new Blob([content],{type}); const u=URL.createObjectURL(b); const a=document.createElement("a"); a.href=u; a.download=name; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(u); a.remove(); },100); }
+function exportMd(){ const s=state; const tally=s.voteTally||{}; let md=`# Brainwriting — resultados\n\n`;
+  [...s.sheets].sort((a,b)=>(tally[b.id]||0)-(tally[a.id]||0)).forEach((sheet)=>{ md+=`## ${sheet.need}\n\n*Votos: ${tally[sheet.id]||0}*\n\n`; [...sheet.contributions].sort((a,b)=>a.round-b.round).forEach(c=>{ md+=`**Ronda ${c.round} · ${c.name}**\n\n${c.text||'—'}\n\n`; }); });
+  download("brainwriting-"+s.code+".md",md,"text/markdown"); }
+function exportCsv(){ const s=state; const tally=s.voteTally||{}; const rows=[["necesidad","votos","ronda","participante","aporte"]];
+  s.sheets.forEach(sheet=>{ [...sheet.contributions].sort((a,b)=>a.round-b.round).forEach(c=>rows.push([sheet.need,String(tally[sheet.id]||0),String(c.round),c.name,c.text||""])); });
+  const csv=rows.map(r=>r.map(f=>`"${String(f).replace(/"/g,'""')}"`).join(",")).join("\r\n"); download("brainwriting-"+s.code+".csv","﻿"+csv,"text/csv"); }
+function exportJson(){ const s=state; const tally=s.voteTally||{}; const data={ codigo:s.code, necesidades:s.sheets.map(sheet=>({ necesidad:sheet.need, votos:tally[sheet.id]||0, aportes:[...sheet.contributions].sort((a,b)=>a.round-b.round).map(c=>({ronda:c.round,participante:c.name,texto:c.text})) })) }; download("brainwriting-"+s.code+".json",JSON.stringify(data,null,2),"application/json"); }
 
-// ---------------------------------------------------------------------------
-// Export (facilitador)
-// ---------------------------------------------------------------------------
-function download(name, content, type){
-  const blob=new Blob([content],{type});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a"); a.href=url; a.download=name; document.body.appendChild(a); a.click();
-  setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); },100);
-}
-function exportMd(){
-  const s=state; let md=`# Brainwriting — resultados\n\n**Necesidad:** ${s.need}\n\n`;
-  s.sheets.forEach((sheet,i)=>{
-    md+=`## Hoja ${i+1}\n\n`;
-    const layers=[...sheet.contributions].sort((a,b)=>a.round-b.round);
-    if(!layers.length){ md+=`_(sin aportes)_\n\n`; return; }
-    layers.forEach(c=>{ md+=`**Ronda ${c.round} · ${c.name}**\n\n${c.text||'—'}\n\n`; });
-  });
-  download("brainwriting-"+s.code+".md", md, "text/markdown");
-}
-function exportCsv(){
-  const s=state; const rows=[["hoja","ronda","participante","aporte"]];
-  s.sheets.forEach((sheet,i)=>{
-    [...sheet.contributions].sort((a,b)=>a.round-b.round).forEach(c=>{
-      rows.push([String(i+1),String(c.round),c.name,c.text||""]);
-    });
-  });
-  const csv=rows.map(r=>r.map(f=>`"${String(f).replace(/"/g,'""')}"`).join(",")).join("\r\n");
-  download("brainwriting-"+s.code+".csv", "﻿"+csv, "text/csv");
-}
-function exportJson(){
-  const s=state;
-  const data={ necesidad:s.need, codigo:s.code, hojas:s.sheets.map((sheet,i)=>({
-    hoja:i+1, aportes:[...sheet.contributions].sort((a,b)=>a.round-b.round).map(c=>({ronda:c.round,participante:c.name,texto:c.text}))
-  }))};
-  download("brainwriting-"+s.code+".json", JSON.stringify(data,null,2), "application/json");
-}
-
-// arranque
 render();
 </script>
 </body>
