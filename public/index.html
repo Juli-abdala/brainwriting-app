@@ -160,7 +160,7 @@ function tryRejoin(){
 function createSession(){ socket.emit("createSession",{},(r)=>{ if(r&&r.ok){ me={role:"facilitator",code:r.code,facilitatorToken:r.facilitatorToken,participantId:null,name:null}; state=r.state; saveLocal(); render(); } else toast("No se pudo crear la sala."); }); }
 function joinSession(code,name){ socket.emit("joinSession",{code:code.toUpperCase(),name},(r)=>{ if(r&&r.ok){ me={role:"participant",code:code.toUpperCase(),participantId:r.participantId,name,facilitatorToken:null}; state=r.state; saveLocal(); render(); } else toast(r&&r.error?r.error:"No se pudo unir."); }); }
 function fac(ev,extra,cb){ socket.emit(ev,Object.assign({code:me.code,token:me.facilitatorToken},extra||{}),cb||function(){}); }
-function sendContribution(text){ socket.emit("updateContribution",{code:me.code,participantId:me.participantId,text},(r)=>{ if(r&&r.ok){ saveState="ok"; updateSaveLabel(); } }); }
+function sendContribution(text,round){ socket.emit("updateContribution",{code:me.code,participantId:me.participantId,text,round},(r)=>{ if(r&&r.ok){ saveState="ok"; updateSaveLabel(); } }); }
 function updateSaveLabel(){ const el=document.getElementById("saveLabel"); if(!el) return; el.textContent=saveState==="saving"?"Guardando…":saveState==="ok"?"Guardado ✓":""; el.className="save"+(saveState==="ok"?" ok":""); }
 
 function stateKey(){
@@ -172,6 +172,8 @@ function render(){
   const key=stateKey();
   if(key===lastKey && isTextFocused()) return;
   const sy=window.scrollY;
+  // si cambió de ronda/vista, cancelar cualquier guardado pendiente (evita que se cuele texto viejo)
+  if(key!==lastKey){ clearTimeout(saveTimer); saveState="idle"; }
   lastKey=key;
   if(tick){ clearInterval(tick); tick=null; }
   if(!me.role){ renderLanding(); }
@@ -244,6 +246,15 @@ function facLobby(s){
   let hint="";
   if(nSel>0&&nP>=2){ if(nSel===nP) hint="Una necesidad por persona."; else if(nSel<nP) hint="Hay menos necesidades que personas: algunas arrancarán en más de una hoja."; else hint="Hay más necesidades que personas: se usarán "+nP+" al azar."; }
   const roundsEd=s.rounds.map((r,i)=>`<div class="re"><input type="text" data-rlabel="${i}" value="${esc(r.label)}"/><input type="number" data-rmin="${i}" min="1" max="60" step="0.5" value="${r.minutes}"/></div>`).join("");
+  let asigna="";
+  if(nP>0 && nSel>0){
+    const arows=s.participants.map(p=>{
+      const cur=(s.assignments&&s.assignments[p.id])||"";
+      const opts=`<option value="">Al azar</option>`+s.selectedNeeds.map(t=>`<option value="${esc(t)}" ${cur===t?'selected':''}>${esc(shortNeed(t))}</option>`).join("");
+      return `<div class="re" style="grid-template-columns:140px 1fr"><div style="font-weight:700;padding-top:10px">${esc(p.name)}</div><select data-assign="${p.id}">${opts}</select></div>`;
+    }).join("");
+    asigna=`<div class="card plain"><h2>Asignar a alguien en particular (opcional)</h2><p class="muted small">Fijale una necesidad a una persona; el resto se reparte al azar.</p><div class="rounds-edit">${arows}</div></div>`;
+  }
   return `
     <div class="grid cols2">
       <div class="card"><h2>Compartí el acceso</h2><p class="muted small">Escaneando el QR o con el código.</p>
@@ -258,6 +269,7 @@ function facLobby(s){
       <div>${pool}</div>
       <div class="row" style="margin-top:10px"><input id="customNeed" type="text" maxlength="240" placeholder="Agregar una necesidad nueva…" style="flex:1;min-width:220px"/><button class="btn sec sm" id="addNeed">Agregar</button></div>
     </div>
+    ${asigna}
     <div class="card plain"><h2>Rondas</h2><p class="muted small">Por defecto: 4 rondas de 4 min.</p><div class="rounds-edit">${roundsEd}</div><button class="btn sec sm" id="saveRounds">Guardar rondas</button></div>
     <div class="row"><button class="btn" id="startBtn" ${(nSel<1||nP<2)?'disabled':''}>Asignar al azar y arrancar</button>${(nP<2)?'<span class="muted small">Necesitás 2+ participantes.</span>':(nSel<1?'<span class="muted small">Elegí al menos una necesidad.</span>':'')}</div>`;
 }
@@ -266,6 +278,7 @@ function wireFacLobby(){
   document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=(e)=>{ e.preventDefault(); fac("removeParticipant",{participantId:b.getAttribute("data-remove")}); });
   document.querySelectorAll("[data-need]").forEach(chk=>chk.onchange=()=>{ const chosen=[...document.querySelectorAll("[data-need]")].filter(c=>c.checked).map(c=>c.getAttribute("data-need")); fac("setSelectedNeeds",{needs:chosen}); });
   const add=document.getElementById("addNeed"); if(add) add.onclick=()=>{ const inp=document.getElementById("customNeed"); const t=inp.value.trim(); if(t){ fac("addCustomNeed",{text:t}); inp.value=""; } };
+  document.querySelectorAll("[data-assign]").forEach(sel=>sel.onchange=()=>fac("setAssignment",{participantId:sel.getAttribute("data-assign"),need:sel.value}));
   const sr=document.getElementById("saveRounds"); if(sr) sr.onclick=()=>{ const rounds=state.rounds.map((r,i)=>({label:(document.querySelector('[data-rlabel="'+i+'"]')||{}).value||r.label,minutes:parseFloat((document.querySelector('[data-rmin="'+i+'"]')||{}).value)||r.minutes,prompt:r.prompt})); fac("setRounds",{rounds},(x)=>toast(x&&x.ok?"Rondas guardadas":"Error")); };
   const st=document.getElementById("startBtn"); if(st) st.onclick=()=>fac("startWorkshop",{},(r)=>{ if(r&&!r.ok) toast(r.error||"No se pudo arrancar."); });
 }
@@ -451,12 +464,16 @@ function renderParticipant(){
     <div class="card"><div class="row"><span class="tag">${esc(r.label||'')}</span><span class="muted small">Ronda ${s.currentRound} de ${s.totalRounds}</span></div>
       <div class="need" style="margin:12px 0">${esc(sheet?sheet.need:'')}</div><p class="prompt">${esc(r.prompt||'')}</p></div>
     ${s.currentRound>1?`<h2 style="margin:16px 0 8px">Lo que ya tiene la hoja</h2><div>${priorHtml}</div>`:''}
-    <div class="card plain"><label>${s.currentRound===1?'Tus 3 ideas':'Tu aporte de esta ronda'}</label>
+    <div class="card plain"><label>${s.currentRound===1?'Tu idea':'Tu aporte de esta ronda'}</label>
       <textarea id="myText" ${running?'':'disabled'} placeholder="${running?'Escribí acá…':'Esperá a que arranque/reanude la ronda…'}">${esc(mine?mine.text:'')}</textarea>
       <div class="row" style="margin-top:6px"><span class="save" id="saveLabel"></span><div class="spacer"></div>${!running?'<span class="muted small">La ronda está pausada o terminó.</span>':''}</div></div>
     <div class="row"><button class="btn ghost sm" id="leaveBtn">Salir</button></div>`;
   const ta=document.getElementById("myText");
-  if(ta){ ta.oninput=()=>{ saveState="saving"; updateSaveLabel(); clearTimeout(saveTimer); saveTimer=setTimeout(()=>sendContribution(ta.value),400); }; ta.onblur=()=>{ clearTimeout(saveTimer); sendContribution(ta.value); }; }
+  const myRound=s.currentRound;
+  if(ta){
+    ta.oninput=()=>{ if(!state||state.currentRound!==myRound) return; saveState="saving"; updateSaveLabel(); clearTimeout(saveTimer); saveTimer=setTimeout(()=>sendContribution(ta.value,myRound),400); };
+    ta.onblur=()=>{ clearTimeout(saveTimer); if(!state||state.currentRound!==myRound) return; sendContribution(ta.value,myRound); };
+  }
   document.getElementById("leaveBtn").onclick=leave;
 }
 function partLobby(s){

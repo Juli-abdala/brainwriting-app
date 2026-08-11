@@ -29,7 +29,7 @@ app.get("/health", (_req, res) => res.json({ ok: true }));
 const sessions = new Map();
 
 const DEFAULT_ROUNDS = [
-  { label: "Ronda 1 — generar", minutes: 4, prompt: "Escribí 3 ideas de herramienta o servicio que respondan a esta necesidad. Concretas, y por ahora sin preocuparse por la factibilidad ni por el nivel de desarrollo. En silencio." },
+  { label: "Ronda 1 — generar", minutes: 4, prompt: "Escribí 1 idea de herramienta o servicio que responda a esta necesidad. Concreta, y por ahora sin preocuparte por la factibilidad ni por el nivel de desarrollo. En silencio." },
   { label: "Ronda 2 — construir", minutes: 4, prompt: "Se pasa la hoja a la derecha. Construí sobre alguna de las ideas que te llegaron: llevala más lejos, combinala, hacela más específica, o pensá qué le falta." },
   { label: "Ronda 3 — construir", minutes: 4, prompt: "Se pasa otra vez, con la misma consigna. La hoja ya tiene capas de aporte, así que lo que se agrega ahora se apoya en algo más enriquecido." },
   { label: "Ronda 4 — construir", minutes: 4, prompt: "Última pasada. Cerrá y potenciá: quedate con lo más prometedor de la hoja y dejá tu mejor aporte para dejarla lista para la siguiente etapa." },
@@ -91,6 +91,7 @@ function newSession() {
     rounds: DEFAULT_ROUNDS.map((r) => ({ ...r })),
     needsPool: DEFAULT_NEEDS_POOL.map((n) => ({ ...n })),
     selectedNeeds: [],
+    assignments: {}, // participantId -> needText (asignación fija; el resto va al azar)
     status: "lobby", // lobby | running | results
     currentRound: 0,
     order: [],
@@ -125,6 +126,7 @@ function publicState(session) {
     rounds: session.rounds,
     needsPool: session.needsPool,
     selectedNeeds: session.selectedNeeds,
+    assignments: session.assignments,
     status: session.status,
     currentRound: session.currentRound,
     totalRounds: session.rounds.length,
@@ -234,7 +236,16 @@ io.on("connection", (socket) => {
   socket.on("removeParticipant", ({ code, token, participantId } = {}, cb) => {
     const s = getSession(code); if (!isFacilitator(s, token)) return ack(cb, { ok: false });
     if (s.status !== "lobby") return ack(cb, { ok: false });
-    delete s.participants[participantId]; broadcast(s); ack(cb, { ok: true });
+    delete s.participants[participantId]; delete s.assignments[participantId]; broadcast(s); ack(cb, { ok: true });
+  });
+  socket.on("setAssignment", ({ code, token, participantId, need } = {}, cb) => {
+    const s = getSession(code); if (!isFacilitator(s, token)) return ack(cb, { ok: false });
+    if (s.status !== "lobby") return ack(cb, { ok: false });
+    if (!s.participants[participantId]) return ack(cb, { ok: false });
+    const t = String(need || "").trim();
+    if (!t) delete s.assignments[participantId];
+    else s.assignments[participantId] = t;
+    broadcast(s); ack(cb, { ok: true });
   });
 
   socket.on("startWorkshop", ({ code, token } = {}, cb) => {
@@ -242,9 +253,18 @@ io.on("connection", (socket) => {
     const ids = Object.keys(s.participants);
     if (ids.length < 2) return ack(cb, { ok: false, error: "Necesitás al menos 2 participantes." });
     if (!s.selectedNeeds.length) return ack(cb, { ok: false, error: "Elegí al menos una necesidad." });
-    const chosen = shuffle(s.selectedNeeds.slice());
+    // necesidad de arranque por participante: fijas primero, el resto al azar
+    const selected = s.selectedNeeds.slice();
+    const startNeed = {};
+    ids.forEach((pid) => { const a = s.assignments[pid]; if (a && selected.includes(a)) startNeed[pid] = a; });
+    const unpinned = ids.filter((pid) => !startNeed[pid]);
+    const usedByPin = new Set(Object.values(startNeed));
+    let pool = shuffle(selected.filter((nt) => !usedByPin.has(nt)));
+    if (pool.length === 0) pool = shuffle(selected.slice());
+    let pi = 0;
+    unpinned.forEach((pid) => { startNeed[pid] = pool[pi % pool.length]; pi++; if (pi % pool.length === 0) pool = shuffle(pool); });
     s.order = shuffle(ids.slice());
-    s.sheets = s.order.map((_, i) => ({ id: "hoja-" + (i + 1), need: chosen[i % chosen.length], contributions: [] }));
+    s.sheets = s.order.map((pid, i) => ({ id: "hoja-" + (i + 1), need: startNeed[pid], contributions: [] }));
     s.status = "running"; s.currentRound = 1; startRoundTimer(s); broadcast(s); ack(cb, { ok: true });
   });
 
@@ -264,13 +284,15 @@ io.on("connection", (socket) => {
     s.status = "lobby"; s.currentRound = 0; s.order = []; s.sheets = [];
     s.timer = { running: false, endsAt: null, remainingMs: null };
     s.resultsView = "mural"; s.votingOpen = false; s.votes = {}; s.matrix = {};
-    clearTimer(s.code); if (!keepParticipants) s.participants = {};
+    clearTimer(s.code); if (!keepParticipants) { s.participants = {}; s.assignments = {}; }
     broadcast(s); ack(cb, { ok: true });
   });
 
-  socket.on("updateContribution", ({ code, participantId, text } = {}, cb) => {
+  socket.on("updateContribution", ({ code, participantId, text, round } = {}, cb) => {
     const s = getSession(code); if (!s || s.status !== "running") return ack(cb, { ok: false });
     const p = s.participants[participantId]; if (!p) return ack(cb, { ok: false });
+    // guardado tardío de una ronda anterior: rechazar
+    if (round != null && round !== s.currentRound) return ack(cb, { ok: false, error: "Ronda vencida." });
     const running = s.timer.running && s.timer.endsAt && Date.now() < s.timer.endsAt + 1000;
     if (!running) return ack(cb, { ok: false, error: "La ronda no está activa." });
     const n = s.order.length; const pIndex = s.order.indexOf(participantId); if (pIndex < 0) return ack(cb, { ok: false });
